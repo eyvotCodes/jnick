@@ -5,7 +5,7 @@ package com.example.jnick.discriminator;
  */
 public class SingleVocalDiscriminator extends Discriminator {
 
-    private final int           A =  0, E =  1, I =  2, O =  3, U =  4;
+    private final int           A = 0, E = 1, I = 2, O = 3, U = 4;
     private       boolean[][]   positionsMatrix;
 
     private final String        SINGLE_VOCALS = "a-e-i-o-u";

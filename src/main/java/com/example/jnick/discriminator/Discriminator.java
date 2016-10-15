@@ -10,7 +10,6 @@ public abstract class Discriminator {
                                     new boolean[] {false, false, false};
 
     protected final String      CHARACTER_SEPARATOR = "-";
-    protected final String      CHARACTER_BLANK     =  "";
 
     public Discriminator() {}
 
