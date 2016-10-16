@@ -33,6 +33,16 @@ public class SingleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
+    @Override public short getCollectionSize() {
+        return (short)
+            SINGLE_VOCALS
+                .split(CHARACTER_SEPARATOR)
+                .length;
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
     @Override public boolean[] getValidPositions(String singleVocal) {
         switch(singleVocal) {
             case "a": return positionsMatrix[A];
@@ -42,16 +52,6 @@ public class SingleVocalDiscriminator extends Discriminator {
             case "u": return positionsMatrix[U];
         }
         return POSITION_NOT_FOUND_ERROR;
-    }
-
-    /**
-     * {@inheritDoc}
-     * */
-    @Override public short getCollectionSize() {
-        return (short)
-            SINGLE_VOCALS
-                .split(CHARACTER_SEPARATOR)
-                .length;
     }
 
     /**

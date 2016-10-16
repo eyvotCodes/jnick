@@ -23,19 +23,19 @@ public abstract class Discriminator {
     public abstract boolean isValid(String characters);
 
     /**
-     * Obtains the valid positions that a token can be have into a nickname.
-     *
-     * @param   token valid token
-     * @return        positions
-     * */
-    public abstract boolean[] getValidPositions(String token);
-
-    /**
      * Obtains the number of single, double or triple character tokens that
      * can be valid.
      *
      * @return number of valid tokens in a class.
      * */
     public abstract short getCollectionSize();
+
+    /**
+     * Obtains the valid positions that a token can be have into a nickname.
+     *
+     * @param   token valid token
+     * @return        positions
+     * */
+    public abstract boolean[] getValidPositions(String token);
 
 }

@@ -36,6 +36,16 @@ public class SingleConsonantDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
+    @Override public short getCollectionSize() {
+        return (short)
+            SINGLE_CONSONANTS
+                .split(CHARACTER_SEPARATOR)
+                .length;
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
     @Override public boolean[] getValidPositions(String singleConsonant) {
         switch(singleConsonant) {
             case "b": return positionsMatrix[B];
@@ -61,16 +71,6 @@ public class SingleConsonantDiscriminator extends Discriminator {
             case "z": return positionsMatrix[Z];
         }
         return POSITION_NOT_FOUND_ERROR;
-    }
-
-    /**
-     * {@inheritDoc}
-     * */
-    @Override public short getCollectionSize() {
-        return (short)
-            SINGLE_CONSONANTS
-                .split(CHARACTER_SEPARATOR)
-                .length;
     }
 
     /**

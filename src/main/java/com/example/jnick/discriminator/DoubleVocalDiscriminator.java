@@ -39,6 +39,16 @@ public class DoubleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
+    @Override public short getCollectionSize() {
+        return (short)
+            DOUBLE_VOCALS
+                .split(CHARACTER_SEPARATOR)
+                .length;
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
     @Override public boolean[] getValidPositions(String doubleVocal) {
         switch(doubleVocal) {
             case "ae": return positionsMatrix[AE];
@@ -58,16 +68,6 @@ public class DoubleVocalDiscriminator extends Discriminator {
             case "uo": return positionsMatrix[UO];
         }
         return POSITION_NOT_FOUND_ERROR;
-    }
-
-    /**
-     * {@inheritDoc}
-     * */
-    @Override public short getCollectionSize() {
-        return (short)
-            DOUBLE_VOCALS
-                .split(CHARACTER_SEPARATOR)
-                .length;
     }
 
     /**
