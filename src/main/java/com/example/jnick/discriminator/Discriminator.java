@@ -5,9 +5,9 @@ package com.example.jnick.discriminator;
  */
 public abstract class Discriminator {
 
-    protected final int         NUMBER_OF_POSITIONS =   3;
-    protected final boolean[]   POSITION_NOT_FOUND_ERROR =
-                                    new boolean[] {false, false, false};
+    protected final short       NUMBER_OF_POSITIONS = 3;
+    protected final boolean[]   POSITION_NOT_FOUND_ERROR
+                                    = new boolean[] {false, false, false};
 
     protected final String      CHARACTER_SEPARATOR = "-";
 
@@ -36,6 +36,6 @@ public abstract class Discriminator {
      *
      * @return number of valid tokens in a class.
      * */
-    public abstract int getCollectionSize();
+    public abstract short getCollectionSize();
 
 }

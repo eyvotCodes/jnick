@@ -5,8 +5,9 @@ package com.example.jnick.discriminator;
  */
 public class SingleVocalDiscriminator extends Discriminator {
 
-    private final int           A = 0, E = 1, I = 2, O = 3, U = 4;
     private       boolean[][]   positionsMatrix;
+    private final short
+        A = 0, E = 1, I = 2, O = 3, U = 4;
 
     private final String        SINGLE_VOCALS = "a-e-i-o-u";
 
@@ -46,8 +47,9 @@ public class SingleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public int getCollectionSize() {
-        return SINGLE_VOCALS
+    @Override public short getCollectionSize() {
+        return (short)
+            SINGLE_VOCALS
                 .split(CHARACTER_SEPARATOR)
                 .length;
     }

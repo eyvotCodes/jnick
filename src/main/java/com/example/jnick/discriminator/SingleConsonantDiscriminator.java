@@ -66,10 +66,11 @@ public class SingleConsonantDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public int getCollectionSize() {
-        return SINGLE_CONSONANTS
-            .split(CHARACTER_SEPARATOR)
-            .length;
+    @Override public short getCollectionSize() {
+        return (short)
+            SINGLE_CONSONANTS
+                .split(CHARACTER_SEPARATOR)
+                .length;
     }
 
     /**
