@@ -1,4 +1,4 @@
-package com.example.jnick.discriminator;
+package com.example.jnick.discriminators;
 
 /**
  * @author fabian
