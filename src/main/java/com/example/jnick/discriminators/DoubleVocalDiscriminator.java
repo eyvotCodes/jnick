@@ -1,5 +1,7 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
+
 /**
  * @author fabian
  */
@@ -49,7 +51,8 @@ public class DoubleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public boolean[] getValidPositions(String doubleVocal) {
+    @Override public boolean[] getValidPositions(String doubleVocal)
+            throws PositionsNotFoundException {
         switch(doubleVocal) {
             case "ae": return positionsMatrix[AE];
             case "ai": return positionsMatrix[AI];
@@ -66,8 +69,10 @@ public class DoubleVocalDiscriminator extends Discriminator {
             case "ue": return positionsMatrix[UE];
             case "ui": return positionsMatrix[UI];
             case "uo": return positionsMatrix[UO];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            doubleVocal
+        );
     }
 
     /**

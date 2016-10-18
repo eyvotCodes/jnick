@@ -1,5 +1,6 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,16 +39,16 @@ public class TripleConsonantDiscriminatorTest {
         expectedIsValidForFirstPosition,
         expectedIsValidForMiddlePosition,
         expectedIsValidForLastPosition;
-    private String  singleConsonant;
+    private String tripleConsonant;
     private TripleConsonantDiscriminator discriminator;
 
-    public TripleConsonantDiscriminatorTest(String singleConsonant,
+    public TripleConsonantDiscriminatorTest(String tripleConsonant,
         boolean expectedIsValid,
         boolean expectedIsValidForFirstPosition,
         boolean expectedIsValidForMiddlePosition,
         boolean expectedIsValidForLastPosition) {
 
-        this.singleConsonant = singleConsonant;
+        this.tripleConsonant = tripleConsonant;
         this.expectedIsValid = expectedIsValid;
 
         this.expectedIsValidForFirstPosition
@@ -70,12 +71,12 @@ public class TripleConsonantDiscriminatorTest {
     public void isValid() {
         Assert.assertEquals(
             this.expectedIsValid,
-            discriminator.isValid(this.singleConsonant)
+            discriminator.isValid(this.tripleConsonant)
         );
     }
 
-    @Test
-    public void getValidPositions() {
+    @Test()
+    public void getValidPositions() throws PositionsNotFoundException {
         Assert.assertTrue(
             Arrays.equals(
                 new boolean[] {
@@ -83,7 +84,18 @@ public class TripleConsonantDiscriminatorTest {
                     this.expectedIsValidForMiddlePosition,
                     this.expectedIsValidForLastPosition
                 },
-                discriminator.getValidPositions(this.singleConsonant)
+                discriminator.getValidPositions(this.tripleConsonant)
+            )
+        );
+    }
+
+    @Test(expected = PositionsNotFoundException.class)
+    public void getValidPositionsException()
+            throws PositionsNotFoundException {
+        Assert.assertTrue(
+            Arrays.equals(
+                new boolean[] {false, false, false},
+                discriminator.getValidPositions(this.tripleConsonant + "#")
             )
         );
     }

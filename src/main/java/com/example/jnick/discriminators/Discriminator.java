@@ -5,11 +5,11 @@ package com.example.jnick.discriminators;
  */
 public abstract class Discriminator {
 
-    protected final short       NUMBER_OF_POSITIONS = 3;
-    protected final boolean[]   POSITION_NOT_FOUND_ERROR
-                                    = new boolean[] {false, false, false};
+    protected final short   NUMBER_OF_POSITIONS = 3;
 
-    protected final String      CHARACTER_SEPARATOR = "-";
+    protected final String  CHARACTER_SEPARATOR = "-";
+    protected final String  POSITIONS_NOT_FOUND_MESSAGE
+                                = "Error: positions not found.";
 
     public Discriminator() {}
 

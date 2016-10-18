@@ -1,5 +1,6 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -72,7 +73,7 @@ public class SingleConsonantDiscriminatorTest {
     }
 
     @Test
-    public void getValidPositions() {
+    public void getValidPositions() throws PositionsNotFoundException {
         Assert.assertTrue(
             Arrays.equals(
                 new boolean[] {
@@ -81,6 +82,17 @@ public class SingleConsonantDiscriminatorTest {
                     this.expectedIsValidForLastPosition
                 },
                 discriminator.getValidPositions(this.singleConsonant)
+            )
+        );
+    }
+
+    @Test(expected = PositionsNotFoundException.class)
+    public void getValidPositionsException()
+        throws PositionsNotFoundException {
+        Assert.assertTrue(
+            Arrays.equals(
+                new boolean[] {false, false, false},
+                discriminator.getValidPositions(this.singleConsonant + "#")
             )
         );
     }

@@ -1,13 +1,13 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.AlphabetCharacterRequiredException;
+
 /**
  * @author fabian
  */
 public class Util {
 
     private       static boolean[][]   rulesMatrix;
-    private final static short         CHARACTER_NOT_FOUND_ERROR = -1;
-
     private final static short
         A =  0, B =  1, C =  2, D =  3, E =  5, F =  6, G =  7, H =  8,
         I =  9, J = 10, K = 11, L = 12, M = 13, N = 14, O = 15, P = 16,
@@ -16,6 +16,8 @@ public class Util {
 
     private final static String VOCALS     = "aeiou";
     private final static String CONSONANTS = "bcdfghjklmnpqrstvwxyz";
+    private final static String ALPHABET_CHARACTER_REQIURED_MESSAGE
+                                    = "Error: alphabet character required.";
 
 
     private Util() {
@@ -110,9 +112,10 @@ public class Util {
             case 'x': return X;
             case 'y': return Y;
             case 'z': return Z;
-        }
-
-        return CHARACTER_NOT_FOUND_ERROR;
+        } throw new AlphabetCharacterRequiredException(
+            ALPHABET_CHARACTER_REQIURED_MESSAGE,
+            character
+        );
     }
 
     /**

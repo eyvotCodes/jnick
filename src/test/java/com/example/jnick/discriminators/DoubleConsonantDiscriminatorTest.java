@@ -1,5 +1,6 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,16 +37,16 @@ public class DoubleConsonantDiscriminatorTest {
         expectedIsValidForFirstPosition,
         expectedIsValidForMiddlePosition,
         expectedIsValidForLastPosition;
-    private String  singleConsonant;
+    private String doubleConsonant;
     private DoubleConsonantDiscriminator discriminator;
 
-    public DoubleConsonantDiscriminatorTest(String singleConsonant,
+    public DoubleConsonantDiscriminatorTest(String doubleConsonant,
         boolean expectedIsValid,
         boolean expectedIsValidForFirstPosition,
         boolean expectedIsValidForMiddlePosition,
         boolean expectedIsValidForLastPosition) {
 
-        this.singleConsonant = singleConsonant;
+        this.doubleConsonant = doubleConsonant;
         this.expectedIsValid = expectedIsValid;
 
         this.expectedIsValidForFirstPosition
@@ -68,12 +69,12 @@ public class DoubleConsonantDiscriminatorTest {
     public void isValid() {
         Assert.assertEquals(
             this.expectedIsValid,
-            discriminator.isValid(this.singleConsonant)
+            discriminator.isValid(this.doubleConsonant)
         );
     }
 
     @Test
-    public void getValidPositions() {
+    public void getValidPositions() throws PositionsNotFoundException {
         Assert.assertTrue(
             Arrays.equals(
                 new boolean[] {
@@ -81,7 +82,18 @@ public class DoubleConsonantDiscriminatorTest {
                     this.expectedIsValidForMiddlePosition,
                     this.expectedIsValidForLastPosition
                 },
-                discriminator.getValidPositions(this.singleConsonant)
+                discriminator.getValidPositions(this.doubleConsonant)
+            )
+        );
+    }
+
+    @Test(expected = PositionsNotFoundException.class)
+    public void getValidPositionsException()
+        throws PositionsNotFoundException {
+        Assert.assertTrue(
+            Arrays.equals(
+                new boolean[] {false, false, false},
+                discriminator.getValidPositions(this.doubleConsonant + "#")
             )
         );
     }

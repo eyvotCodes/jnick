@@ -1,5 +1,7 @@
 package com.example.jnick.discriminators;
 
+import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
+
 /**
  * @author fabian
  */
@@ -356,7 +358,8 @@ public class TripleConsonantDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public boolean[] getValidPositions(String tripleConsonant) {
+    @Override public boolean[] getValidPositions(String tripleConsonant)
+            throws PositionsNotFoundException {
         char firstCharacter = getFirstCharacter(tripleConsonant);
         switch(firstCharacter) {
             case 'b': return getValidPositionsForB(tripleConsonant);
@@ -379,8 +382,10 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case 'x': return getValidPositionsForX(tripleConsonant);
             case 'y': return getValidPositionsForY(tripleConsonant);
             case 'z': return getValidPositionsForZ(tripleConsonant);
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
     /*
@@ -531,7 +536,8 @@ public class TripleConsonantDiscriminator extends Discriminator {
      * getValidPositions() subMethods
      * */
 
-    private boolean[] getValidPositionsForB(String tripleConsonant) {
+    private boolean[] getValidPositionsForB(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "bbr": return positionsMatrixForB[BBR];
             case "bbs": return positionsMatrixForB[BBS];
@@ -550,20 +556,26 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "byv": return positionsMatrixForB[BYV];
             case "byz": return positionsMatrixForB[BYZ];
             case "bzy": return positionsMatrixForB[BZY];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForC(String tripleConsonant) {
+    private boolean[] getValidPositionsForC(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "ccl": return positionsMatrixForC[CCL];
             case "ccr": return positionsMatrixForC[CCR];
             case "cry": return positionsMatrixForC[CRY];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForD(String tripleConsonant) {
+    private boolean[] getValidPositionsForD(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "ddr": return positionsMatrixForD[DDR];
             case "dds": return positionsMatrixForD[DDS];
@@ -595,11 +607,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "dyt": return positionsMatrixForD[DYT];
             case "dyv": return positionsMatrixForD[DYV];
             case "dyz": return positionsMatrixForD[DYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForF(String tripleConsonant) {
+    private boolean[] getValidPositionsForF(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "ffl": return positionsMatrixForF[FFL];
             case "ffr": return positionsMatrixForF[FFR];
@@ -628,11 +643,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "fzn": return positionsMatrixForF[FZN];
             case "fzy": return positionsMatrixForF[FZY];
             case "fzz": return positionsMatrixForF[FZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForG(String tripleConsonant) {
+    private boolean[] getValidPositionsForG(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "ggl": return positionsMatrixForG[GGL];
             case "ggr": return positionsMatrixForG[GGR];
@@ -643,11 +661,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "grr": return positionsMatrixForG[GRR];
             case "grs": return positionsMatrixForG[GRS];
             case "gry": return positionsMatrixForG[GRY];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForH(String tripleConsonant) {
+    private boolean[] getValidPositionsForH(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "hwc": return positionsMatrixForH[HWC];
             case "hwg": return positionsMatrixForH[HWG];
@@ -665,11 +686,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "hyt": return positionsMatrixForH[HYT];
             case "hyv": return positionsMatrixForH[HYV];
             case "hyz": return positionsMatrixForH[HYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForJ(String tripleConsonant) {
+    private boolean[] getValidPositionsForJ(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "jwc": return positionsMatrixForJ[JWC];
             case "jwg": return positionsMatrixForJ[JWG];
@@ -677,11 +701,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "jwm": return positionsMatrixForJ[JWM];
             case "jwt": return positionsMatrixForJ[JWT];
             case "jwx": return positionsMatrixForJ[JWX];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForK(String tripleConsonant) {
+    private boolean[] getValidPositionsForK(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "kkl": return positionsMatrixForK[KKL];
             case "kkr": return positionsMatrixForK[KKR];
@@ -715,11 +742,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "kyt": return positionsMatrixForK[KYT];
             case "kyv": return positionsMatrixForK[KYV];
             case "kyz": return positionsMatrixForK[KYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForL(String tripleConsonant) {
+    private boolean[] getValidPositionsForL(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "lbb": return positionsMatrixForL[LBB];
             case "lbh": return positionsMatrixForL[LBH];
@@ -782,11 +812,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "lyz": return positionsMatrixForL[LYZ];
             case "lzy": return positionsMatrixForL[LZY];
             case "lzz": return positionsMatrixForL[LZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForM(String tripleConsonant) {
+    private boolean[] getValidPositionsForM(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "mbb": return positionsMatrixForM[MBB];
             case "mbh": return positionsMatrixForM[MBH];
@@ -802,11 +835,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "myt": return positionsMatrixForM[MYT];
             case "myv": return positionsMatrixForM[MYV];
             case "myz": return positionsMatrixForM[MYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForN(String tripleConsonant) {
+    private boolean[] getValidPositionsForN(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "nbb": return positionsMatrixForN[NBB];
             case "nbh": return positionsMatrixForN[NBH];
@@ -878,11 +914,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "nyz": return positionsMatrixForN[NYZ];
             case "nzy": return positionsMatrixForN[NZY];
             case "nzz": return positionsMatrixForN[NZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForP(String tripleConsonant) {
+    private boolean[] getValidPositionsForP(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "plw": return positionsMatrixForP[PLW];
             case "ply": return positionsMatrixForP[PLY];
@@ -914,11 +953,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "pyt": return positionsMatrixForP[PYT];
             case "pyv": return positionsMatrixForP[PYV];
             case "pyz": return positionsMatrixForP[PYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForR(String tripleConsonant) {
+    private boolean[] getValidPositionsForR(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "rbb": return positionsMatrixForR[RBB];
             case "rbh": return positionsMatrixForR[RBH];
@@ -988,11 +1030,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "rzg": return positionsMatrixForR[RZG];
             case "rzy": return positionsMatrixForR[RZY];
             case "rzz": return positionsMatrixForR[RZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForS(String tripleConsonant) {
+    private boolean[] getValidPositionsForS(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "sbb": return positionsMatrixForS[SBB];
             case "sbh": return positionsMatrixForS[SBH];
@@ -1050,11 +1095,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "syt": return positionsMatrixForS[SYT];
             case "syv": return positionsMatrixForS[SYV];
             case "syz": return positionsMatrixForS[SYZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForT(String tripleConsonant) {
+    private boolean[] getValidPositionsForT(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "trs": return positionsMatrixForT[TRS];
             case "try": return positionsMatrixForT[TRY];
@@ -1092,11 +1140,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "tzn": return positionsMatrixForT[TZN];
             case "tzy": return positionsMatrixForT[TZY];
             case "tzz": return positionsMatrixForT[TZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForV(String tripleConsonant) {
+    private boolean[] getValidPositionsForV(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "vls": return positionsMatrixForV[VLS];
             case "vly": return positionsMatrixForV[VLY];
@@ -1130,11 +1181,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "vzg": return positionsMatrixForV[VZG];
             case "vzy": return positionsMatrixForV[VZY];
             case "vzz": return positionsMatrixForV[VZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForW(String tripleConsonant) {
+    private boolean[] getValidPositionsForW(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "wcc": return positionsMatrixForW[WCC];
             case "wch": return positionsMatrixForW[WCH];
@@ -1164,11 +1218,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "wtz": return positionsMatrixForW[WTZ];
             case "wxt": return positionsMatrixForW[WXT];
             case "wxx": return positionsMatrixForW[WXX];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForX(String tripleConsonant) {
+    private boolean[] getValidPositionsForX(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "xth": return positionsMatrixForX[XTH];
             case "xtr": return positionsMatrixForX[XTR];
@@ -1176,10 +1233,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "xtw": return positionsMatrixForX[XTW];
             case "xty": return positionsMatrixForX[XTY];
         }
-        return POSITION_NOT_FOUND_ERROR;
+        throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForY(String tripleConsonant) {
+    private boolean[] getValidPositionsForY(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "ybb": return positionsMatrixForY[YBB];
             case "ybh": return positionsMatrixForY[YBH];
@@ -1278,11 +1339,14 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "yzn": return positionsMatrixForY[YZN];
             case "yzy": return positionsMatrixForY[YZY];
             case "yzz": return positionsMatrixForY[YZZ];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
-    private boolean[] getValidPositionsForZ(String tripleConsonant) {
+    private boolean[] getValidPositionsForZ(String tripleConsonant)
+            throws PositionsNotFoundException {
         switch(tripleConsonant) {
             case "zbb": return positionsMatrixForZ[ZBB];
             case "zbh": return positionsMatrixForZ[ZBH];
@@ -1319,8 +1383,10 @@ public class TripleConsonantDiscriminator extends Discriminator {
             case "zyv": return positionsMatrixForZ[ZYV];
             case "zyz": return positionsMatrixForZ[ZYZ];
             case "zzy": return positionsMatrixForZ[ZZY];
-        }
-        return POSITION_NOT_FOUND_ERROR;
+        } throw new PositionsNotFoundException(
+            POSITIONS_NOT_FOUND_MESSAGE,
+            tripleConsonant
+        );
     }
 
     /**
