@@ -14,8 +14,11 @@ public class Util {
         Q = 17, R = 18, S = 19, T = 20, U = 21, V = 22, W = 23, X = 23,
         Y = 24, Z = 25;
 
-    private final static String VOCALS     = "aeiou";
-    private final static String CONSONANTS = "bcdfghjklmnpqrstvwxyz";
+    private final static String VOWEL_TYPE      = "vocal";
+    private final static String CONSONANT_TYPE  = "consonant";
+    private final static String VOWELS          = "aeiou";
+    private final static String CONSONANTS      = "bcdfghjklmnpqrstvwxyz";
+
     private final static String ALPHABET_CHARACTER_REQIURED_MESSAGE
                                     = "Error: alphabet character required.";
 
@@ -26,15 +29,35 @@ public class Util {
 
 
     /**
-     * Checks if a pair of characters both are vocals or consonants.
+     * Obtains the type of one character: vowel or consonant.
+     *
+     * @param   character character to know its type.
+     * @return            vowel or consonant.
+     * */
+    public static String getCharacterType(char character)
+            throws AlphabetCharacterRequiredException {
+        if(isVowel(character)) {
+            return VOWEL_TYPE;
+        } else if(isConsonant(character)) {
+            return CONSONANT_TYPE;
+        } else {
+            throw new AlphabetCharacterRequiredException(
+                ALPHABET_CHARACTER_REQIURED_MESSAGE,
+                character
+            );
+        }
+    }
+
+    /**
+     * Checks if a pair of characters both are vowels or consonants.
      *
      * @param   characterOne first character.
      * @param   characterTwo second character.
      * @return               are of the same type or not.
      * */
     public static boolean areSameType(char characterOne, char characterTwo) {
-        return isVocal(characterOne)
-            && isVocal(characterTwo)
+        return isVowel(characterOne)
+            && isVowel(characterTwo)
             || isConsonant(characterOne)
             && isConsonant(characterTwo);
     }
@@ -53,14 +76,14 @@ public class Util {
     }
 
     /**
-     * Checks if a character is vocal or not.
+     * Checks if a character is vowel or not.
      *
      * @param   character character to check.
-     * @return            vocal or not vocal.
+     * @return            vowel or not vocal.
      * */
-    private static boolean isVocal(char character) {
-        for(char vocal:VOCALS.toCharArray()) {
-            if(character == vocal) return true;
+    private static boolean isVowel(char character) {
+        for(char vowel: VOWELS.toCharArray()) {
+            if(character == vowel) return true;
         }
         return false;
     }
@@ -123,7 +146,7 @@ public class Util {
      * can be after another one.
      * */
     private static void initRulesMatrix() {
-        short matrixBounds =(short) (VOCALS + CONSONANTS).length();
+        short matrixBounds =(short) (VOWELS + CONSONANTS).length();
 
         rulesMatrix = new boolean[matrixBounds][matrixBounds];
         rulesMatrix[A][A] = false;
