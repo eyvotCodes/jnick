@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.example.jnick.discriminators.*;
-import com.example.jnick.nicknames.exceptions.InvalidLengthForStructureException;
+import com.example.jnick
+          .nicknames.exceptions
+          .InvalidLengthForStructureException;
 
 /**
  * @author fabian
@@ -142,8 +144,8 @@ public abstract class Nickname {
     }
 
     /**
-     * A flexible automaton that checks the syntax given in the structures
-     * to determine if a nickname is valid or not.
+     * A crazy but flexible automaton that checks the syntax given in the
+     * structures to determine if a nickname is valid or not.
      * <p>
      * The automaton is adaptive to any length of nickname.
      * */
@@ -152,6 +154,8 @@ public abstract class Nickname {
         String[] tokens = tokenize();
         String[] structureTokensType =
             Util.getStructureTokensType(structure);
+         short[] tokensPosition =
+            Util.getTokensPosition(tokens);
 
         if(tokens.length == structureTokensType.length) {
             for(int i=0; i<tokens.length; i++) {
@@ -161,11 +165,15 @@ public abstract class Nickname {
                             if(svd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && svd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     ) {
                                 isValid = true;
                             } else if(scd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && scd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     ) {
                                 isValid = true;
                             } else {
@@ -176,6 +184,8 @@ public abstract class Nickname {
                             if(svd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && svd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     && Util.canBeSequence(
                                     tokens[i-1].charAt(
                                         tokens[i-1].length() - 1
@@ -186,6 +196,8 @@ public abstract class Nickname {
                             } else if(scd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && scd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     && Util.canBeSequence(
                                     tokens[i-1].charAt(
                                         tokens[i-1].length() - 1
@@ -205,11 +217,15 @@ public abstract class Nickname {
                             if(dvd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && dvd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     ) {
                                 isValid = true;
                             } else if(dcd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && dcd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     ) {
                                 isValid = true;
                             } else {
@@ -220,6 +236,8 @@ public abstract class Nickname {
                             if(dvd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && dvd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     && Util.canBeSequence(
                                     tokens[i-1].charAt(
                                         tokens[i-1].length() - 1
@@ -230,6 +248,8 @@ public abstract class Nickname {
                             } else if(dcd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && dcd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     && Util.canBeSequence(
                                     tokens[i-1].charAt(
                                         tokens[i-1].length() - 1
@@ -249,6 +269,8 @@ public abstract class Nickname {
                             if(tcd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && tcd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     ) {
                                 isValid = true;
                             } else {
@@ -259,6 +281,8 @@ public abstract class Nickname {
                             if(tcd.isValid(tokens[i])
                                     && Util.getTokenType(tokens[i])
                                     .equals(structureTokensType[i])
+                                    && tcd.getValidPositions
+                                    (tokens[i])[tokensPosition[i]]
                                     && Util.canBeSequence(
                                     tokens[i-1].charAt(
                                         tokens[i-1].length() - 1

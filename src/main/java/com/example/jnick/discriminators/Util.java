@@ -22,6 +22,10 @@ public class Util {
         Q = 16, R = 17, S = 18, T = 19, U = 20, V = 21, W = 22, X = 23,
         Y = 24, Z = 25;
 
+    private final static short  FIRST_POSITION  = 0;
+    private final static short  MIDDLE_POSITION = 1;
+    private final static short  LAST_POSITION   = 2;
+
     private final static String SINGLE_VOWEL_TYPE       = "SVT";
     private final static String SINGLE_CONSONANT_TYPE   = "SCT";
     private final static String DOUBLE_VOWEL_TYPE       = "DVT";
@@ -46,12 +50,45 @@ public class Util {
 
 
     /**
+     * Obtains the positions in a nickname for given tokens.
+     *
+     * @param   tokens tokens of one nickname.
+     * @return         position of each token.
+     * */
+    public static short[] getTokensPosition(String[] tokens) {
+        int tokensLength = tokens.length;
+        int firstPosition = 0, lastPosition;
+        short[] tokensPosition = new short[tokensLength];
+
+        if(tokensLength == 1) {
+            tokensPosition[firstPosition] = FIRST_POSITION;
+        } else if(tokensLength == 2) {
+            lastPosition = tokensLength - 1;
+            tokensPosition[firstPosition] = FIRST_POSITION;
+            tokensPosition[lastPosition] = LAST_POSITION;
+        } else if(tokensLength >= 3) {
+            lastPosition = tokensLength - 1;
+            tokensPosition[firstPosition] = FIRST_POSITION;
+            tokensPosition[lastPosition] = LAST_POSITION;
+            for(int i = firstPosition + 1;
+                    i < lastPosition;
+                    i++) {
+                tokensPosition[i] = MIDDLE_POSITION;
+            }
+        }
+
+        return tokensPosition;
+    }
+
+    /**
      * Obtains the type of each structure token in a structure.
      *
      * @param   structure structure to get its structure tokens type.
      * @return            tokens type.
      * */
-    public static String[] getStructureTokensType(String structure) {
+    public static String[] getStructureTokensType(String structure)
+            throws StructureCharacterRequiredException,
+                   ValidTokenRequiredException {
         String[] structureTokens = getStructureTokens(structure);
         String[] structureTokensType = new String[structureTokens.length];
         for(int i=0; i<structureTokens.length; i++) {
@@ -107,7 +144,8 @@ public class Util {
      * @return        token type.
      * */
     public static String getTokenType(String token)
-            throws ValidTokenRequiredException {
+            throws ValidTokenRequiredException,
+                   AlphabetCharacterRequiredException {
         char characterOne, characterTwo, characterThree;
 
         switch(token.length()) {
