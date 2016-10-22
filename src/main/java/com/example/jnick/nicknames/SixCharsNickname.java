@@ -12,12 +12,12 @@ import java.util.ArrayList;
 /**
  * @author fabian
  */
-public class NicknameFourChars extends Nickname {
+public class SixCharsNickname extends Nickname {
 
-    private final int NICKNAME_LENGTH = 4;
+    private final int NICKNAME_LENGTH = 6;
 
 
-    public NicknameFourChars(String nickname)
+    public SixCharsNickname(String nickname)
             throws InvalidLengthForNicknameException {
         super(nickname);
         if(nickname.length() != NICKNAME_LENGTH) {
@@ -36,14 +36,17 @@ public class NicknameFourChars extends Nickname {
      * */
     @Override public void setValidStructures() {
         // CAUTION:
-        // Only add structures with length = 4.
-        validStructures.add("CCVC");
-        validStructures.add("CCVV");
-        validStructures.add("CVCV");
-        validStructures.add("CVVC");
-        validStructures.add("VCCV");
-        validStructures.add("VCVC");
-        validStructures.add("VVCV");
+        // Only add structures with length = 6.
+        validStructures.add("CCVVCV");
+        validStructures.add("CCVCVC");
+        validStructures.add("CVCCVV");
+        validStructures.add("CVCCVC");
+        validStructures.add("CVCVCC");
+        validStructures.add("CVCVCV");
+        validStructures.add("CVCVVC");
+        validStructures.add("VCVCCC");
+        validStructures.add("VCVCCV");
+        validStructures.add("VCVCVC");
     }
 
     /**
@@ -63,4 +66,5 @@ public class NicknameFourChars extends Nickname {
             }
         }
     }
+
 }

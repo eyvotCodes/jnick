@@ -46,7 +46,7 @@ public class NicknameTest {
 
     @Before
     public void initValues() {
-        nickameFiveChars = new NicknameFiveChars(this.nickname);
+        nickameFiveChars = new FiveCharsNickname(this.nickname);
     }
 
     @Test
