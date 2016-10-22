@@ -1,5 +1,8 @@
 package com.example.jnick.nicknames;
 
+import com.example.jnick.nicknames.exceptions.InvalidLengthForNicknameException;
+import com.example.jnick.nicknames.exceptions.InvalidLengthForStructureException;
+
 import java.util.ArrayList;
 
 /**
@@ -7,38 +10,58 @@ import java.util.ArrayList;
  */
 public class NicknameFiveChars extends Nickname {
 
-    private final
-        ArrayList<String> VALID_STRUCTURES = new ArrayList<String>();
+    private final int NICKNAME_LENGTH = 5;
 
 
     public NicknameFiveChars(String nickname) {
         super(nickname);
-        initValidStructures();
-    }
-
-
-    @Override public boolean isValid() {
-        return false;
+        if(nickname.length() != NICKNAME_LENGTH) {
+            throw new InvalidLengthForNicknameException(
+                INVALID_LENGTH_FOR_NICKNAME_MESSAGE,
+                NICKNAME_LENGTH
+            );
+        } else {
+            setValidStructures();
+        }
     }
 
 
     /**
-     * Adds all structures for nicknames of 5 characters.
+     * {@inheritDoc}
      * */
-    private void initValidStructures() {
-        VALID_STRUCTURES.add("CVCVV");
-        VALID_STRUCTURES.add("CVCCV");
-        VALID_STRUCTURES.add("CVCCC");
-        VALID_STRUCTURES.add("CVCVC");
-        VALID_STRUCTURES.add("CCVCC");
-        VALID_STRUCTURES.add("CCVCV");
-        VALID_STRUCTURES.add("CVVCV");
-        VALID_STRUCTURES.add("VCCCV");
-        VALID_STRUCTURES.add("VCCVC");
-        VALID_STRUCTURES.add("VCVCC");
-        VALID_STRUCTURES.add("VCVCV");
-        VALID_STRUCTURES.add("VCVVC");
-        VALID_STRUCTURES.add("VVCVC");
+    @Override public void setValidStructures() {
+        // CAUTION:
+        // Only add structures with length = 5.
+        validStructures.add("CVCCV");
+        validStructures.add("CVCCC");
+        validStructures.add("CVCVC");
+        validStructures.add("CCVCC");
+        validStructures.add("CCVCV");
+        validStructures.add("CVVCV");
+        validStructures.add("VCCCV");
+        validStructures.add("VCCVC");
+        validStructures.add("VCVCC");
+        validStructures.add("VCVCV");
+        validStructures.add("VCVVC");
+        validStructures.add("VVCVC");
+    }
+
+    /**
+     * {@inheritDoc}
+     * */
+    @Override public void setValidStructures(ArrayList<String> structures)
+            throws InvalidLengthForStructureException {
+        validStructures.clear();
+        for(String structure:structures) {
+            if(structure.length() != NICKNAME_LENGTH) {
+                throw new InvalidLengthForStructureException(
+                    INVALID_LENGTH_FOR_STRUCTURE_MESSAGE,
+                    NICKNAME_LENGTH
+                );
+            } else {
+                validStructures.add(structure);
+            }
+        }
     }
 
 }
