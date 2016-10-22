@@ -1,6 +1,14 @@
 package com.example.jnick.discriminators;
 
-import com.example.jnick.discriminators.exceptions.AlphabetCharacterRequiredException;
+import com.example.jnick
+          .discriminators.exceptions
+          .AlphabetCharacterRequiredException;
+import com.example.jnick
+          .discriminators.exceptions
+          .ValidTokenRequiredException;
+import com.example.jnick
+          .nicknames.exceptions
+          .StructureCharacterRequiredException;
 
 /**
  * @author fabian
@@ -9,32 +17,209 @@ public class Util {
 
     private       static boolean[][]   rulesMatrix;
     private final static short
-        A =  0, B =  1, C =  2, D =  3, E =  5, F =  6, G =  7, H =  8,
-        I =  9, J = 10, K = 11, L = 12, M = 13, N = 14, O = 15, P = 16,
-        Q = 17, R = 18, S = 19, T = 20, U = 21, V = 22, W = 23, X = 23,
+        A =  0, B =  1, C =  2, D =  3, E =  4, F =  5, G =  6, H =  7,
+        I =  8, J =  9, K = 10, L = 11, M = 12, N = 13, O = 14, P = 15,
+        Q = 16, R = 17, S = 18, T = 19, U = 20, V = 21, W = 22, X = 23,
         Y = 24, Z = 25;
 
-    private final static String VOCALS     = "aeiou";
-    private final static String CONSONANTS = "bcdfghjklmnpqrstvwxyz";
+    private final static short  FIRST_POSITION  = 0;
+    private final static short  MIDDLE_POSITION = 1;
+    private final static short  LAST_POSITION   = 2;
+
+    private final static String SINGLE_VOWEL_TYPE       = "SVT";
+    private final static String SINGLE_CONSONANT_TYPE   = "SCT";
+    private final static String DOUBLE_VOWEL_TYPE       = "DVT";
+    private final static String DOUBLE_CONSONANT_TYPE   = "DCT";
+    private final static String TRIPLE_CONSONANT_TYPE   = "TCT";
+
+    private final static String VOWELS      = "aeiou";
+    private final static String CONSONANTS  = "bcdfghjklmnpqrstvwxyz";
+
     private final static String ALPHABET_CHARACTER_REQIURED_MESSAGE
-                                    = "Error: alphabet character required.";
+                                = "\nError: alphabet character required.";
+    private final static String VALID_TOKEN_REQIURED_MESSAGE
+                                = "\nError: token not valid.";
+    private final static String STRUCTURE_CHARACTER_REQUIRED_MESSAGE
+                                = "\nError: structure character required.";
+    private final static String REGEX_PATTERN_STRUCTURE_SEPARATOR
+                                = "(?<=(C|V))(?=(C|V))(?!\\1)";
 
 
-    private Util() {
-        initRulesMatrix();
-    }
+    static {initRulesMatrix();}
+    private Util() {}
 
 
     /**
-     * Checks if a pair of characters both are vocals or consonants.
+     * Obtains the positions in a nickname for given tokens.
+     *
+     * @param   tokens tokens of one nickname.
+     * @return         position of each token.
+     * */
+    public static short[] getTokensPosition(String[] tokens) {
+        int tokensLength = tokens.length;
+        int firstPosition = 0, lastPosition;
+        short[] tokensPosition = new short[tokensLength];
+
+        if(tokensLength == 1) {
+            tokensPosition[firstPosition] = FIRST_POSITION;
+        } else if(tokensLength == 2) {
+            lastPosition = tokensLength - 1;
+            tokensPosition[firstPosition] = FIRST_POSITION;
+            tokensPosition[lastPosition] = LAST_POSITION;
+        } else if(tokensLength >= 3) {
+            lastPosition = tokensLength - 1;
+            tokensPosition[firstPosition] = FIRST_POSITION;
+            tokensPosition[lastPosition] = LAST_POSITION;
+            for(int i = firstPosition + 1;
+                    i < lastPosition;
+                    i++) {
+                tokensPosition[i] = MIDDLE_POSITION;
+            }
+        }
+
+        return tokensPosition;
+    }
+
+    /**
+     * Obtains the type of each structure token in a structure.
+     *
+     * @param   structure structure to get its structure tokens type.
+     * @return            tokens type.
+     * */
+    public static String[] getStructureTokensType(String structure)
+            throws StructureCharacterRequiredException,
+                   ValidTokenRequiredException {
+        String[] structureTokens = getStructureTokens(structure);
+        String[] structureTokensType = new String[structureTokens.length];
+        for(int i=0; i<structureTokens.length; i++) {
+            structureTokensType[i] = getStructureTokenType(
+                structureTokens[i]
+            );
+        }
+        return structureTokensType;
+    }
+
+    /**
+     * Obtains all structure tokens of one token structure.
+     *
+     * @param   structure structure to get its tokens.
+     * @return            structure tokens.
+     * */
+    public static String[] getStructureTokens(String structure)
+            throws StructureCharacterRequiredException {
+        for(char character:structure.toCharArray()) {
+            if(character != 'C' && character != 'V') throw new
+                StructureCharacterRequiredException(
+                    STRUCTURE_CHARACTER_REQUIRED_MESSAGE,
+                    character
+            );
+        }
+        return structure.split(REGEX_PATTERN_STRUCTURE_SEPARATOR);
+    }
+
+    /**
+     * Obtains the type of one structure token.
+     *
+     * @param   structureToken token to know its type.
+     * @return                 token type.
+     * */
+    public static String getStructureTokenType(String structureToken)
+        throws ValidTokenRequiredException {
+        switch(structureToken) {
+            case   "V": return SINGLE_VOWEL_TYPE;
+            case   "C": return SINGLE_CONSONANT_TYPE;
+            case  "VV": return DOUBLE_VOWEL_TYPE;
+            case  "CC": return DOUBLE_CONSONANT_TYPE;
+            case "CCC": return TRIPLE_CONSONANT_TYPE;
+        } throw new ValidTokenRequiredException(
+            VALID_TOKEN_REQIURED_MESSAGE,
+            structureToken
+        );
+    }
+
+    /**
+     * Obtains the type of one token.
+     *
+     * @param   token token to know its type.
+     * @return        token type.
+     * */
+    public static String getTokenType(String token)
+            throws ValidTokenRequiredException,
+                   AlphabetCharacterRequiredException {
+        char characterOne, characterTwo, characterThree;
+
+        switch(token.length()) {
+            case 1:
+                characterOne = token.charAt(0);
+                if(getCharacterType(characterOne)
+                        .equals(SINGLE_VOWEL_TYPE)) {
+                    return SINGLE_VOWEL_TYPE;
+                } else if(getCharacterType(characterOne)
+                        .equals(SINGLE_CONSONANT_TYPE)) {
+                    return SINGLE_CONSONANT_TYPE;
+                } break;
+            case 2:
+                characterOne = token.charAt(0);
+                characterTwo = token.charAt(1);
+                if(getCharacterType(characterOne)
+                        .equals(SINGLE_VOWEL_TYPE)
+                    && getCharacterType(characterTwo)
+                        .equals(SINGLE_VOWEL_TYPE)) {
+                    return DOUBLE_VOWEL_TYPE;
+                } else if(getCharacterType(characterOne)
+                        .equals(SINGLE_CONSONANT_TYPE)
+                    && getCharacterType(characterTwo)
+                        .equals(SINGLE_CONSONANT_TYPE)) {
+                    return DOUBLE_CONSONANT_TYPE;
+                } break;
+            case 3:
+                characterOne = token.charAt(0);
+                characterTwo = token.charAt(1);
+                characterThree = token.charAt(2);
+                if(getCharacterType(characterOne)
+                        .equals(SINGLE_CONSONANT_TYPE)
+                    && getCharacterType(characterTwo)
+                        .equals(SINGLE_CONSONANT_TYPE)
+                    && getCharacterType(characterThree)
+                        .equals(SINGLE_CONSONANT_TYPE)) {
+                    return TRIPLE_CONSONANT_TYPE;
+                } break;
+        } throw new ValidTokenRequiredException(
+            VALID_TOKEN_REQIURED_MESSAGE,
+            token
+        );
+    }
+
+    /**
+     * Obtains the type of one character: vowel or consonant.
+     *
+     * @param   character character to know its type.
+     * @return            vowel or consonant.
+     * */
+    public static String getCharacterType(char character)
+            throws AlphabetCharacterRequiredException {
+        if(isVowel(character)) {
+            return SINGLE_VOWEL_TYPE;
+        } else if(isConsonant(character)) {
+            return SINGLE_CONSONANT_TYPE;
+        } else {
+            throw new AlphabetCharacterRequiredException(
+                ALPHABET_CHARACTER_REQIURED_MESSAGE,
+                character
+            );
+        }
+    }
+
+    /**
+     * Checks if a pair of characters both are vowels or consonants.
      *
      * @param   characterOne first character.
      * @param   characterTwo second character.
      * @return               are of the same type or not.
      * */
     public static boolean areSameType(char characterOne, char characterTwo) {
-        return isVocal(characterOne)
-            && isVocal(characterTwo)
+        return isVowel(characterOne)
+            && isVowel(characterTwo)
             || isConsonant(characterOne)
             && isConsonant(characterTwo);
     }
@@ -53,14 +238,14 @@ public class Util {
     }
 
     /**
-     * Checks if a character is vocal or not.
+     * Checks if a character is vowel or not.
      *
      * @param   character character to check.
-     * @return            vocal or not vocal.
+     * @return            vowel or not vocal.
      * */
-    private static boolean isVocal(char character) {
-        for(char vocal:VOCALS.toCharArray()) {
-            if(character == vocal) return true;
+    private static boolean isVowel(char character) {
+        for(char vowel:VOWELS.toCharArray()) {
+            if(character == vowel) return true;
         }
         return false;
     }
@@ -123,7 +308,7 @@ public class Util {
      * can be after another one.
      * */
     private static void initRulesMatrix() {
-        short matrixBounds =(short) (VOCALS + CONSONANTS).length();
+        short matrixBounds =(short) (VOWELS + CONSONANTS).length();
 
         rulesMatrix = new boolean[matrixBounds][matrixBounds];
         rulesMatrix[A][A] = false;

@@ -277,13 +277,13 @@ public class DoubleConsonantDiscriminator extends Discriminator {
         positionsMatrix[DS] = new boolean[] {true,true,true};
         positionsMatrix[DW] = new boolean[] {true,true,true};
         positionsMatrix[DY] = new boolean[] {true,true,true};
-        positionsMatrix[FF] = new boolean[] {false,true,false};
+        positionsMatrix[FF] = new boolean[] {false,true,true};
         positionsMatrix[FL] = new boolean[] {true,true,false};
         positionsMatrix[FN] = new boolean[] {false,true,true};
         positionsMatrix[FR] = new boolean[] {true,true,false};
         positionsMatrix[FS] = new boolean[] {true,true,true};
         positionsMatrix[FZ] = new boolean[] {true,true,true};
-        positionsMatrix[GG] = new boolean[] {false,true,false};
+        positionsMatrix[GG] = new boolean[] {false,true,true};
         positionsMatrix[GH] = new boolean[] {true,true,false};
         positionsMatrix[GL] = new boolean[] {true,true,true};
         positionsMatrix[GM] = new boolean[] {false,true,false};
@@ -364,7 +364,7 @@ public class DoubleConsonantDiscriminator extends Discriminator {
         positionsMatrix[SN] = new boolean[] {true,true,false};
         positionsMatrix[SP] = new boolean[] {true,true,false};
         positionsMatrix[SQ] = new boolean[] {true,true,false};
-        positionsMatrix[SS] = new boolean[] {false,true,false};
+        positionsMatrix[SS] = new boolean[] {false,true,true};
         positionsMatrix[ST] = new boolean[] {true,true,true};
         positionsMatrix[SV] = new boolean[] {true,true,false};
         positionsMatrix[SW] = new boolean[] {true,true,true};
@@ -373,7 +373,7 @@ public class DoubleConsonantDiscriminator extends Discriminator {
         positionsMatrix[TL] = new boolean[] {true,true,false};
         positionsMatrix[TR] = new boolean[] {true,true,true};
         positionsMatrix[TS] = new boolean[] {false,true,true};
-        positionsMatrix[TT] = new boolean[] {false,true,false};
+        positionsMatrix[TT] = new boolean[] {false,true,true};
         positionsMatrix[TW] = new boolean[] {true,true,true};
         positionsMatrix[TY] = new boolean[] {true,true,true};
         positionsMatrix[TZ] = new boolean[] {false,true,true};

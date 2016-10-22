@@ -5,14 +5,14 @@ import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
 /**
  * @author fabian
  */
-public class DoubleVocalDiscriminator extends Discriminator {
+public class DoubleVowelDiscriminator extends Discriminator {
 
     private       boolean[][] positionsMatrix;
     private final short
         AE = 0, AI = 1, EA = 2, EI =  3, EO =  4, EU =  5, IA =  6,
         IE = 7, IO = 8, OE = 9, OO = 10, UA = 11, UE = 12, UI = 13, UO = 14;
 
-    private final String DOUBLE_VOCALS
+    private final String DOUBLE_VOWELS
         = "ae-ai-"
         + "ea-ei-eo-eu-"
         + "ia-ie-io-"
@@ -20,7 +20,7 @@ public class DoubleVocalDiscriminator extends Discriminator {
         + "ua-ue-ui-uo";
 
 
-    public DoubleVocalDiscriminator() {
+    public DoubleVowelDiscriminator() {
         initPositionsMatrix();
     }
 
@@ -29,7 +29,7 @@ public class DoubleVocalDiscriminator extends Discriminator {
      * {@inheritDoc}
      * */
     @Override public boolean isValid(String doubleCharacter) {
-        for(String doubleVocal:DOUBLE_VOCALS
+        for(String doubleVocal: DOUBLE_VOWELS
                 .split(CHARACTER_SEPARATOR)) {
             if(doubleCharacter.equals(doubleVocal)) {
                 return true;
@@ -43,7 +43,7 @@ public class DoubleVocalDiscriminator extends Discriminator {
      * */
     @Override public short getCollectionSize() {
         return (short)
-            DOUBLE_VOCALS
+            DOUBLE_VOWELS
                 .split(CHARACTER_SEPARATOR)
                 .length;
     }
@@ -51,9 +51,9 @@ public class DoubleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public boolean[] getValidPositions(String doubleVocal)
+    @Override public boolean[] getValidPositions(String doubleVowel)
             throws PositionsNotFoundException {
-        switch(doubleVocal) {
+        switch(doubleVowel) {
             case "ae": return positionsMatrix[AE];
             case "ai": return positionsMatrix[AI];
             case "ea": return positionsMatrix[EA];
@@ -71,13 +71,13 @@ public class DoubleVocalDiscriminator extends Discriminator {
             case "uo": return positionsMatrix[UO];
         } throw new PositionsNotFoundException(
             POSITIONS_NOT_FOUND_MESSAGE,
-            doubleVocal
+            doubleVowel
         );
     }
 
     /**
      * Initializes the matrix that contains all positions about
-     * double vocal tokens.
+     * double vowel tokens.
      * */
     private void initPositionsMatrix() {
         this.positionsMatrix =
