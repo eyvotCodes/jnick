@@ -206,7 +206,7 @@ public class Util {
      * @return            vowel or not vocal.
      * */
     private static boolean isVowel(char character) {
-        for(char vowel: VOWELS.toCharArray()) {
+        for(char vowel:VOWELS.toCharArray()) {
             if(character == vowel) return true;
         }
         return false;
