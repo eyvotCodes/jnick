@@ -1,5 +1,6 @@
 package com.example.jnick.nicknames;
 
+import com.example.jnick.nicknames.exceptions.InvalidLengthForNicknameException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,28 +31,7 @@ public class NicknameTest {
             {"odell", stringify(new String[] {"o", "d", "e", "ll"})},
             {"icaro", stringify(new String[] {"i", "c", "a", "r", "o"})},
             {"elias", stringify(new String[] {"e", "l", "ia", "s"})},
-            {"aegon", stringify(new String[] {"ae", "g", "o", "n"})},
-
-            {"aa",    stringify(new String[] {"aa"})},
-            {"cc",    stringify(new String[] {"cc"})},
-            {"aaa",   stringify(new String[] {"aaa"})},
-            {"ccc",   stringify(new String[] {"ccc"})},
-            {"aaaa",  stringify(new String[] {"aaaa"})},
-            {"cccc",  stringify(new String[] {"cccc"})},
-            {"acccc", stringify(new String[] {"a", "cccc"})},
-            {"caaaa", stringify(new String[] {"c", "aaaa"})},
-            {"aaaac", stringify(new String[] {"aaaa", "c"})},
-            {"cccca", stringify(new String[] {"cccc", "a"})},
-
-            {"aaccaacc",
-                stringify(
-                    new String[] {"aa", "cc", "aa", "cc"})},
-            {"acaacaaa",
-                stringify(
-                    new String[] {"a", "c", "aa", "c", "aaa"})},
-            {"ccacaaacccaaaaa",
-                stringify(
-                    new String[] {"cc", "a", "c", "aaa", "ccc", "aaaaa"})},
+            {"aegon", stringify(new String[] {"ae", "g", "o", "n"})}
         });
     }
 
@@ -70,7 +50,7 @@ public class NicknameTest {
     }
 
     @Test
-    public void tokenize() {
+    public void tokenize() throws InvalidLengthForNicknameException {
         Assert.assertEquals(
             this.expectedTokens,
             stringify(nickameFiveChars.tokenize())

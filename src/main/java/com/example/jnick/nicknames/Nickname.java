@@ -91,7 +91,7 @@ public abstract class Nickname {
      *
      * @return nickname tokens.
      * */
-    private String[] tokenize() {
+    public String[] tokenize() {
         char    currentCharacter    =  0,
                 previousCharacter   =  0;
 

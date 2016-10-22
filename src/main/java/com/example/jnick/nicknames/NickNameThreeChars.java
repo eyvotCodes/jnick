@@ -3,8 +3,8 @@ package com.example.jnick.nicknames;
 import com.example.jnick
           .nicknames.exceptions
           .InvalidLengthForNicknameException;
-import com.example.jnick
-          .nicknames.exceptions
+import com.example.jnick.nicknames
+          .exceptions
           .InvalidLengthForStructureException;
 
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 /**
  * @author fabian
  */
-public class NicknameFiveChars extends Nickname {
+public class NickNameThreeChars extends Nickname {
 
-    private final int NICKNAME_LENGTH = 5;
+    private final int NICKNAME_LENGTH = 3;
 
 
-    public NicknameFiveChars(String nickname)
+    public NickNameThreeChars(String nickname)
             throws InvalidLengthForNicknameException {
         super(nickname);
         if(nickname.length() != NICKNAME_LENGTH) {
@@ -34,27 +34,22 @@ public class NicknameFiveChars extends Nickname {
     /**
      * {@inheritDoc}
      * */
-    @Override public void setValidStructures() {
+    @Override
+    public void setValidStructures() {
         // CAUTION:
-        // Only add structures with length = 5.
-        validStructures.add("CVCCV");
-        validStructures.add("CVCCC");
-        validStructures.add("CVCVC");
-        validStructures.add("CCVCC");
-        validStructures.add("CCVCV");
-        validStructures.add("CVVCV");
-        validStructures.add("VCCCV");
-        validStructures.add("VCCVC");
-        validStructures.add("VCVCC");
-        validStructures.add("VCVCV");
-        validStructures.add("VCVVC");
-        validStructures.add("VVCVC");
+        // Only add structures with length = 3.
+        validStructures.add("CCV");
+        validStructures.add("CVC");
+        validStructures.add("CVV");
+        validStructures.add("VCV");
+        validStructures.add("VVC");
     }
 
     /**
      * {@inheritDoc}
      * */
-    @Override public void setValidStructures(ArrayList<String> structures)
+    @Override
+    public void setValidStructures(ArrayList<String> structures)
             throws InvalidLengthForStructureException {
         validStructures.clear();
         for(String structure:structures) {
@@ -68,5 +63,4 @@ public class NicknameFiveChars extends Nickname {
             }
         }
     }
-
 }
