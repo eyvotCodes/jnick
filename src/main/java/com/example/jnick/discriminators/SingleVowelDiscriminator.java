@@ -5,16 +5,16 @@ import com.example.jnick.discriminators.exceptions.PositionsNotFoundException;
 /**
  * @author fabian
  */
-public class SingleVocalDiscriminator extends Discriminator {
+public class SingleVowelDiscriminator extends Discriminator {
 
     private       boolean[][]   positionsMatrix;
     private final short
         A = 0, E = 1, I = 2, O = 3, U = 4;
 
-    private final String        SINGLE_VOCALS = "a-e-i-o-u";
+    private final String        SINGLE_VOWELS = "a-e-i-o-u";
 
 
-    public SingleVocalDiscriminator() {
+    public SingleVowelDiscriminator() {
         initPositionsMatrix();
     }
 
@@ -23,7 +23,7 @@ public class SingleVocalDiscriminator extends Discriminator {
      * {@inheritDoc}
      * */
     @Override public boolean isValid(String singleCharacter) {
-        for(String singleVocal:SINGLE_VOCALS
+        for(String singleVocal: SINGLE_VOWELS
                 .split(CHARACTER_SEPARATOR)) {
             if(singleCharacter.equals(singleVocal)) {
                 return true;
@@ -37,7 +37,7 @@ public class SingleVocalDiscriminator extends Discriminator {
      * */
     @Override public short getCollectionSize() {
         return (short)
-            SINGLE_VOCALS
+            SINGLE_VOWELS
                 .split(CHARACTER_SEPARATOR)
                 .length;
     }
@@ -45,9 +45,9 @@ public class SingleVocalDiscriminator extends Discriminator {
     /**
      * {@inheritDoc}
      * */
-    @Override public boolean[] getValidPositions(String singleVocal)
+    @Override public boolean[] getValidPositions(String singleVowel)
             throws PositionsNotFoundException {
-        switch(singleVocal) {
+        switch(singleVowel) {
             case "a": return positionsMatrix[A];
             case "e": return positionsMatrix[E];
             case "i": return positionsMatrix[I];
@@ -55,13 +55,13 @@ public class SingleVocalDiscriminator extends Discriminator {
             case "u": return positionsMatrix[U];
         } throw new PositionsNotFoundException(
             POSITIONS_NOT_FOUND_MESSAGE,
-            singleVocal
+            singleVowel
         );
     }
 
     /**
      * Initializes the matrix that contains all positions about
-     * single vocal tokens.
+     * single vowel tokens.
      * */
     private void initPositionsMatrix() {
         this.positionsMatrix =

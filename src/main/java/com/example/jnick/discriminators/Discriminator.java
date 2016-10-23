@@ -9,7 +9,7 @@ public abstract class Discriminator {
 
     protected final String  CHARACTER_SEPARATOR = "-";
     protected final String  POSITIONS_NOT_FOUND_MESSAGE
-                                = "Error: positions not found.";
+                                = "\nError: positions not found.";
 
     public Discriminator() {}
 
